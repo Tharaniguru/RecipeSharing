@@ -1,5 +1,32 @@
-<html>
-    <body>
-        <p>thia is home page</p>
-    </body>
-    </html>
+ {% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href='{% static "css/mystyle.css" %}'>
+</head>
+<body>
+    <div class="navbar">
+        <div class="app-name">My App</div>
+        <div class="nav-links">
+            <a href="#">Profile</a>
+            <a href="#">Login/Signup</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box">
+            <img src="{% static "images/burger.jpg" %}" alt="Image">
+            <p>Sample description for the content box.</p>
+        </div>
+        <div class="box">
+            <img src="{% static "images/pancake.jpg" %}" alt="Image">
+            <p>Another sample description for content.</p>
+        </div>
+        <div class="box">
+            <img src="{% static "images/noodel.jpg" %}" alt="Image">
+            <p>More details about this section go here.</p>
+        </div>
+    </div>
+</body>
+</html>
