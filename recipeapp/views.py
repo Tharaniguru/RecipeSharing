@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Category,Recipes
+import re
 
 def Home_view(request):
     recipies=Recipes.objects.all()
@@ -20,3 +21,12 @@ def profile_view(request):
 def categories_view(request):
     categories = Category.objects.all()
     return render(request ,"categories.html" ,{'categories':categories})
+
+
+def recipedetail_view(request,name):
+    recipedetail=Recipes.objects.filter(name=name)
+    print(recipedetail)
+    return render(request,"displayfood.html",{'recipedetail':recipedetail})
+
+def addrecipe_view(request):
+    return render(request,"addrecipe.html")

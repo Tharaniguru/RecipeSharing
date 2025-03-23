@@ -15,5 +15,7 @@ class Category(models.Model):
 class Recipes(models.Model):
     name=models.CharField(max_length=50)
     discription=models.CharField(max_length=500,null=True,blank=True)
+    recipe_ingredients=models.CharField(max_length=500,null=True,blank=True)
+    recipe_instructions=models.CharField(max_length=500,null=True,blank=True)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='category',null=True,blank=True)
     recipe_image=models.ImageField(null=True , blank=True)

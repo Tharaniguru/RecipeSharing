@@ -1,4 +1,36 @@
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/displayfood.css' %}">
 
-<link rel="stylesheet" href="{% static "css/home.css" %}">
+{% include 'navbar.html' %}
 
+{% if recipedetail %}
+    <div class="container">
+        {% for recipe in recipedetail %}  <!-- Loop through QuerySet -->
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <div class="image-container">
+                    {% if recipe.recipe_image %}
+                        <img src="{{ recipe.recipe_image.url }}" alt="{{ recipe.name }}">
+                    {% else %}
+                        <img src="{% static 'images/download.png' %}" alt="Default Image">
+                    {% endif %}
+                </div>
+                <div class="description-container">
+                    <h2 class="name">{{ recipe.name }}</h2>
+                    <p class="description">{{ recipe.discription }}</p>
+                </div>
+            </div>
+            
+            <div class="recipe-details">
+                <h3>Ingredients:</h3>
+                <p class="ingredients">{{ recipe.recipe_ingredients }}</p>
+
+                <h3>Instructions:</h3>
+                <p class="instructions">{{ recipe.recipe_instructions }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No recipe found.</p>
+{% endif %}

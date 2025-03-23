@@ -14,6 +14,8 @@
             {% endif %}
             <p class="name">{{ recipe.name }}</p>
             <p class="description">{{ recipe.discription }}</p>
+            <a href="{% url "recipedetail" recipe.name %}"><button >View Recipe</button></a>
+            {% comment %} <a href="{% url "recipedetail" recipe.name %}">View Recipe</a> {% endcomment %}
         </div>
         {% endfor %}
     </div>

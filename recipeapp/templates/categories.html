@@ -1,6 +1,7 @@
 {% load static %}
 {% include "navbar.html" %}
-    <link rel="stylesheet" href="{% static "css/home.css" %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
     {% if categories %}
     <div class="container">
         {% for category in categories %}
@@ -11,6 +12,7 @@
                 <img src="{% static 'images/download.png' %}" alt="Default Image">
             {% endif %}
             <p class="name">{{ category.name }}</p>
+            <button>More</button>
         </div>
         {% endfor %}
     </div>
