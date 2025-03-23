@@ -8,6 +8,7 @@
             <h2>{{ request.user.username }}</h2>
             <p>{{ request.user.email }}</p>
             <button id="edit-btn">Edit Profile</button>
+            <button type="add-recipe">ADD RECIPE</button>
         </div>
 
         <div class="profile-edit-form hidden">
@@ -21,9 +22,21 @@
                 <button type="submit">Save Changes</button>
             </form>
         </div>
+
+        <div class="add-recipe-form hidden">
+            <label>Recipe Name :</label>
+            <input type="text" name="recipename" value="recipe" required>
+
+            <label>Description :</label>
+            <input type="text" name="recipedes" value="discription" required>
+        </div>
+        
     <script>
         document.getElementById("edit-btn").addEventListener("click", function() {
             document.querySelector(".profile-edit-form").classList.toggle("hidden");
         });
+        document.getElementById("add-recipe").addEventListener("click",function(){
+
+        })
     </script>
 
