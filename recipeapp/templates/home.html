@@ -1,32 +1,20 @@
- {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href='{% static "css/mystyle.css" %}'>
-</head>
-<body>
-    <div class="navbar">
-        <div class="app-name">My App</div>
-        <div class="nav-links">
-            <a href="#">Profile</a>
-            <a href="#">Login/Signup</a>
-        </div>
-    </div>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+{% include 'navbar.html' %}
+
+{% if recipies %}
     <div class="container">
+        {% for recipe in recipies %}
         <div class="box">
-            <img src="{% static "images/burger.jpg" %}" alt="Image">
-            <p>Sample description for the content box.</p>
+            {% if recipe.recipe_image %}
+                <img src="{{ recipe.recipe_image.url }}" alt="{{ recipe.name }}">
+            {% else %}
+                <img src="{% static 'images/download.png' %}" alt="Default Image">
+            {% endif %}
+            <p class="name">{{ recipe.name }}</p>
+            <p class="description">{{ recipe.discription }}</p>
         </div>
-        <div class="box">
-            <img src="{% static "images/pancake.jpg" %}" alt="Image">
-            <p>Another sample description for content.</p>
-        </div>
-        <div class="box">
-            <img src="{% static "images/noodel.jpg" %}" alt="Image">
-            <p>More details about this section go here.</p>
-        </div>
+        {% endfor %}
     </div>
-</body>
-</html>
+{% endif %}

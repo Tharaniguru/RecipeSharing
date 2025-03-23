@@ -1,0 +1,29 @@
+{% load static %}
+{% include "navbar.html" %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <h2>{{ request.user.username }}</h2>
+            <p>{{ request.user.email }}</p>
+            <button id="edit-btn">Edit Profile</button>
+        </div>
+
+        <div class="profile-edit-form hidden">
+            <form method="POST">
+                <label>Username:</label>
+                <input type="text" name="username" value="{{ request.user.username }}" required>
+
+                <label>Email:</label>
+                <input type="email" name="email" value="{{ request.user.email }}" required>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    <script>
+        document.getElementById("edit-btn").addEventListener("click", function() {
+            document.querySelector(".profile-edit-form").classList.toggle("hidden");
+        });
+    </script>
+

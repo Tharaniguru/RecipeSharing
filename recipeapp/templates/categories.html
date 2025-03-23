@@ -1,0 +1,18 @@
+{% load static %}
+{% include "navbar.html" %}
+    <link rel="stylesheet" href="{% static "css/categories.css" %}">
+    {% if categories %}
+    {% for category in categories %}
+    <div class="card">
+        {% if category.category_image %}
+        <img src="{{ category.category_image }}" alt="{{ category.name }}">
+    {% else %}
+        <img src="{% static 'images/download.png' %}" alt="Default Image">
+    {% endif %}        <h2 class="name">{{category.name}}</h2>
+        <button class="follow-btn">View</button>
+    </div>
+    {% endfor %}
+    
+    {% endif %}
+    
+

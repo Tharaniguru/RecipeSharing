@@ -1,0 +1,13 @@
+{% load static%}
+<link rel="stylesheet" href="{% static "css/login.css" %}">
+    <div class="container">
+        <div class="form-container">
+            <h2>Login</h2>
+            <form action="{%url 'home'%}">
+                <input type="text" placeholder="Username" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <p>Don't have an account? <a href="{% url "signup" %}">Sign up</a></p>
+            </form>
+        </div>
+    </div>

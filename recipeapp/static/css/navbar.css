@@ -1,0 +1,51 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px 20px;
+}
+
+/* Logo Styling */
+.logo a {
+    text-decoration: none !important; /* Remove underline */
+    color: white !important; /* Text color */
+    font-size: 1.8em;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.logo a:hover {
+    color: #f4a261 !important; /* Hover color */
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #f4a261;
+}

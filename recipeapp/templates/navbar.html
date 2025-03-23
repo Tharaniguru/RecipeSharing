@@ -1,0 +1,14 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<nav class="navbar">
+    <div class="logo">
+        <a href="{% url 'home' %}">Recipe Sharing</a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="{% url 'categories' %}">Categories</a></li>
+        <li><a href="{% url 'signup' %}">Signup</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+    </ul>
+</nav>

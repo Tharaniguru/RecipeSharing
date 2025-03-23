@@ -8,6 +8,7 @@ class User(models.Model):
 
 class Category(models.Model):
     name=models.CharField(max_length=50)
+    category_image=models.ImageField(null=True,blank=True)
     def __str__(self):
         return self.name
 
