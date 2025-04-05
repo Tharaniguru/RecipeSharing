@@ -58,7 +58,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save(commit=False)
             raw_password = form.cleaned_data['password']
-            user.set_password(raw_password)  # Hash the password
+            user.set_password(raw_password)  
             user.save()
             login(request, user)  
             return redirect("home")  

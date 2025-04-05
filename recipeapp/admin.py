@@ -11,7 +11,5 @@ class Categoryadmin(admin.ModelAdmin):
 class Recepiesadmin(admin.ModelAdmin):
     list_display=['name','discription','category','recipe_image']
 
-
-
 admin.site.register(Category,Categoryadmin)
 admin.site.register(Recipes,Recepiesadmin)
