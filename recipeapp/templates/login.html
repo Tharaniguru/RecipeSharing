@@ -1,13 +1,14 @@
-{% load static%}
-<link rel="stylesheet" href="{% static "css/login.css" %}">
-    <div class="container">
-        <div class="form-container">
-            <h2>Login</h2>
-            <form>
-                <input type="text" placeholder="Username" required>
-                <input type="password" placeholder="Password" required>
-                <a href="{% url "home" %}"><button type="submit">Login</button></a>
-                <p>Don't have an account? <a href="{% url "signup" %}">Sign up</a></p>
-            </form>
-        </div>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<div class="container">
+    <div class="form-container">
+        <h2>Login</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        </form>
     </div>
+</div>

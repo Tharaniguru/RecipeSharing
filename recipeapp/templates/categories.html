@@ -12,10 +12,9 @@
                 <img src="{% static 'images/download.png' %}" alt="Default Image">
             {% endif %}
             <p class="name">{{ category.name }}</p>
-            <button>More</button>
+            <a href="{% url "category_display" category.name %}"><button>More</button>
         </div>
         {% endfor %}
     </div>
 {% endif %}
     
-

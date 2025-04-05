@@ -2,20 +2,24 @@
 {% include "navbar.html" %}
 <link rel="stylesheet" href="{% static 'css/addrecipe.css' %}">
 
-<form method="POST" action="/add-recipe/" enctype="multipart/form-data">
-    {% csrf_token %}
-    <label>Recipe Name :</label>
-    <input type="text" name="recipename" required>
+<div class="container">
+    <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Recipe Name :</label>
+        <input type="text" name="recipename" required>
 
-    <label>Description :</label>
-    <textarea name="recipedes" required></textarea>
+        <label>Description :</label>
+        <textarea name="recipedescription" required></textarea>
 
-    <label>Recipe :</label>
-    <textarea name="recipedes" required></textarea>
+        <label>Ingredients :</label>
+        <textarea name="recipeingrediants" required></textarea>
 
-    <label>Upload Image:</label>
-    <input type="file" name="recipeimage" accept="image/*" required>
+        <label>Recipe :</label>
+        <textarea name="recipe" required></textarea>
 
-    <button type="submit">Submit Recipe</button>
-</form>
+        <label>Upload Image:</label>
+        <input type="file" name="recipeimage" accept="image/*" required>
+
+        <button type="submit">Submit Recipe</button>
+    </form>
 </div>

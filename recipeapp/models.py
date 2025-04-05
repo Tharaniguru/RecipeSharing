@@ -1,10 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    username=models.CharField(max_length=50)
-    email=models.EmailField(max_length=254)
-    password=models.CharField(max_length=50)
-    profile_photo=models.ImageField(null=True,blank=True)
+# class User(models.Model):
+#     username=models.CharField(max_length=50)
+#     email=models.EmailField(max_length=254)
+#     password=models.CharField(max_length=50)
+#     profile_photo=models.ImageField(null=True,blank=True)
 
 class Category(models.Model):
     name=models.CharField(max_length=50)
@@ -19,3 +20,4 @@ class Recipes(models.Model):
     recipe_instructions=models.CharField(max_length=500,null=True,blank=True)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='category',null=True,blank=True)
     recipe_image=models.ImageField(null=True , blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
