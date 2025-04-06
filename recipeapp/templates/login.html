@@ -1,16 +1,13 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 
-<div class="container">
-    <div class="left-section">
-        <img src="{% static 'images/login-illustration.png' %}" alt="Login Illustration">
-    </div>
-    <div class="right-section">
+<div class="auth-container">
+    <div class="auth-box">
         <h2>Welcome Back!</h2>
         <p>Login to access your favorite recipes and share your own creations!</p>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            
+
             <div class="input-group">
                 <label for="username">Username</label>
                 {{ form.username }}

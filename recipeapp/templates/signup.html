@@ -1,16 +1,13 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 
-<div class="container">
-    <div class="left-section">
-        {% comment %} <img src="{% static 'images/signup-illustration.png' %}" alt="Signup Illustration"> {% endcomment %}
-    </div>
-    <div class="right-section">
+<div class="auth-container">
+    <div class="auth-box">
         <h2>Join the Recipe Hub</h2>
         <p>Discover and share amazing recipes with the world!</p>
         <form method="post" action="{% url 'signup' %}">
             {% csrf_token %}
-            
+
             <div class="input-group">
                 <label for="username">Username</label>
                 {{ form.username }}
