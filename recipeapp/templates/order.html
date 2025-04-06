@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="{% static 'css/addrecipe.css' %}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    
+    <div class="container">
+        <form id="recipe-form" method="POST" action="{% url 'profile' %}">
+            {% csrf_token %}
+            <h2>Order Your Recipe</h2>
+
+            <label>Name:</label>
+            {{form.customer_name}}
+
+            <label>Email:</label>
+            {{form.email}}
+
+            <label>Address:</label>
+            {{form.address}}
+            <label>Phone:</label>
+            {{form.phone}}
+
+            <label>Quantity:</label>
+            {{form.quantity}}
+
+            <button type="submit">Place Order</button>
+        </form>
+    </div>

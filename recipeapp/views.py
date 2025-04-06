@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
-from .models import Category,Recipes
+from .models import *
 import re
 from django.contrib.auth import login,logout
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from .forms import SignUpForm, LoginForm
+from .forms import *
 from django.contrib.auth.decorators import login_required
 
 
@@ -14,6 +14,7 @@ def Home_view(request):
 
 @login_required
 def profile_view(request):
+    orders=OrderForm
     user_recipes = Recipes.objects.filter(user=request.user).order_by('-id')
     return render(request, "profile.html",{"user_recipes": user_recipes})
 
@@ -52,6 +53,24 @@ def addrecipe_view(request):
         messages.success(request, "Recipe added successfully.")
         return redirect("home")  
     return render(request, "addrecipe.html")
+
+@login_required
+def order_view(request,name):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)  
+            order.latitude = request.POST.get('latitude')  
+            order.longitude = request.POST.get('longitude')
+            order.product=name
+            order.save()  
+            messages.success(request, "Order placed successfully.")
+            return redirect('profile')
+    else:
+        form = OrderForm()  
+
+    return render(request, "order.html", {'form': form})
+
 
 @login_required
 def delete_recipe_view(request, id):
@@ -98,3 +117,4 @@ def logout_view(request):
 @login_required
 def follow_view(request):
     pass
+

@@ -28,12 +28,41 @@
                 <h3>Instructions:</h3>
                 <p class="instructions">{{ recipe.recipe_instructions }}</p>
             </div>
-            <button type ='submit'>Order Now</button>
+            <a href="{% url 'order' recipe.name%}">
+                <button>Order Now</button>
+            </a>
         </div>
         {% endfor %}
     </div>
 {% else %}
     <p>No recipe found.</p>
 {% endif %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('recipe-form');
+        if (form) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    const latInput = document.createElement('input');
+                    latInput.type = 'hidden';
+                    latInput.name = 'latitude';
+                    latInput.value = position.coords.latitude;
+    
+                    const lonInput = document.createElement('input');
+                    lonInput.type = 'hidden';
+                    lonInput.name = 'longitude';
+                    lonInput.value = position.coords.longitude;
+    
+                    form.appendChild(latInput);
+                    form.appendChild(lonInput);
+                },
+                function (error) {
+                    console.warn("Location access denied or unavailable:", error.message);
+                }
+            );
+        }
+    });
+    </script>
+    
 
 
