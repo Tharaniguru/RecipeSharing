@@ -1,14 +1,14 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 
-<div class="signup-container">
+<div class="container">
     <div class="left-section">
         {% comment %} <img src="{% static 'images/signup-illustration.png' %}" alt="Signup Illustration"> {% endcomment %}
     </div>
     <div class="right-section">
         <h2>Join the Recipe Hub</h2>
         <p>Discover and share amazing recipes with the world!</p>
-        <form method="post" action="{% url 'home' %}">
+        <form method="post" action="{% url 'signup' %}">
             {% csrf_token %}
             
             <div class="input-group">
@@ -18,12 +18,12 @@
 
             <div class="input-group">
                 <label for="email">Email</label>
-                {{form.email}}
+                {{ form.email }}
             </div>
 
             <div class="input-group">
                 <label for="password">Password</label>
-                {{form.password}}
+                {{ form.password }}
             </div>
 
             <button type="submit">Sign Up</button>

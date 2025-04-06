@@ -2,13 +2,28 @@
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
 <div class="container">
-    <div class="form-container">
-        <h2>Login</h2>
+    <div class="left-section">
+        <img src="{% static 'images/login-illustration.png' %}" alt="Login Illustration">
+    </div>
+    <div class="right-section">
+        <h2>Welcome Back!</h2>
+        <p>Login to access your favorite recipes and share your own creations!</p>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            {{ form.as_p }}
+            
+            <div class="input-group">
+                <label for="username">Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                {{ form.password }}
+            </div>
+
             <button type="submit">Login</button>
-            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+
+            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
         </form>
     </div>
 </div>
