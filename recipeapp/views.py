@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from .models import Category,Recipes
 import re
 from django.contrib.auth import login,logout
-# from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth.decorators import login_required
 
@@ -13,7 +14,8 @@ def Home_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, "profile.html")
+    user_recipes = Recipes.objects.filter(user=request.user).order_by('-id')
+    return render(request, "profile.html",{"user_recipes": user_recipes})
 
 def categories_view(request):
     categories = Category.objects.all()
@@ -33,6 +35,8 @@ def addrecipe_view(request):
         ingredients = request.POST.get("recipeingrediants")
         instructions = request.POST.get("recipe")
         image = request.FILES.get("recipeimage")
+        latitude = request.POST.get('latitude')
+        longitude = request.POST.get('longitude')
 
         recipe = Recipes(
             name=name,
@@ -40,12 +44,21 @@ def addrecipe_view(request):
             recipe_ingredients=ingredients,
             recipe_instructions=instructions,
             recipe_image=image,
-            user=request.user  
+            user=request.user,
+            latitude=latitude if latitude else None,
+            longitude=longitude if longitude else None  
         )
         recipe.save()
-
+        messages.success(request, "Recipe added successfully.")
         return redirect("home")  
     return render(request, "addrecipe.html")
+
+@login_required
+def delete_recipe_view(request, id):
+    recipe = get_object_or_404(Recipes, id=id, user=request.user)
+    recipe.delete()
+    messages.success(request, "Recipe deleted successfully.")
+    return redirect("profile")
 
 
 def categorydisplay_view(request,category):
@@ -81,3 +94,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def follow_view(request):
+    pass

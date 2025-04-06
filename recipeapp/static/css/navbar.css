@@ -1,10 +1,4 @@
-/* General Styles */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
 
-/* Navbar Styling */
 .navbar {
     display: flex;
     justify-content: space-between;

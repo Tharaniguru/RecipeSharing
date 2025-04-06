@@ -14,7 +14,9 @@
         gap: 20px;
         padding: 20px;
     }
-
+.page{
+    text-align: left;
+}
     /* Recipe Card */
     .box {
         background: white;
@@ -24,6 +26,7 @@
         padding: 15px;
         text-align: center;
         transition: transform 0.2s;
+        
     }
 
     .box:hover {

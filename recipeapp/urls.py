@@ -10,5 +10,7 @@ urlpatterns = [
     path("addrecipe/", addrecipe_view, name="addrecipe"),
     path("categories/", categories_view, name="categories"),
     path("categories/<str:name>", recipedetail_view, name="recipedetail"),
-    path("category/<str:category>",categorydisplay_view,name="category_display")
+    path("category/<str:category>",categorydisplay_view,name="category_display"),
+    path("delete-recipe/<int:id>/", delete_recipe_view, name="delete_recipe"),
+    path("follow/<str:user>",follow_view,name="follow")
 ]

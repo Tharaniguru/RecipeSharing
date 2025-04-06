@@ -6,25 +6,43 @@
     <div class="profile-card">
         <h2>{{ request.user.username }}</h2>
         <p>{{ request.user.email }}</p>
-        <button id="edit-btn">Edit Profile</button>
-        <a href="{% url "addrecipe" %}"><button id="add-recipe">ADD RECIPE</button></a>
+        <a href="{% url 'addrecipe' %}">
+            <button id="add-recipe">Add Recipe</button>
+
+        </a>
     </div>
 
-    <div class="profile-edit-form hidden">
-        <form method="POST">
-            {% csrf_token %}
-            <label>Username:</label>
-            <input type="text" name="username" value="{{ request.user.username }}" required>
-
-            <label>Email:</label>
-            <input type="email" name="email" value="{{ request.user.email }}" required>
-
-            <button type="submit">Save Changes</button>
-        </form>
+    <div class="table-container">
+        {% if user_recipes %}
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Recipies</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in user_recipes %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ recipe.name }}</td>
+                    <td>
+                        <a href="{% url 'recipedetail' recipe.name %}">
+                            <button class="view-btn">View</button>
+                        </a>
+                        <a href="{% url 'delete_recipe' recipe.id %}" onclick="return confirm('Are you sure?');">
+                            <button class="del-btn">Del</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        
+        {% else %}
+        <p style="text-align: center;">No recipes found.</p>
+        {% endif %}
     </div>
-
-<script>
-    document.getElementById("edit-btn").addEventListener("click", function() {
-        document.querySelector(".profile-edit-form").classList.toggle("hidden");
-    });
-</script>
+</div>

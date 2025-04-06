@@ -12,9 +12,11 @@
             {% else %}
                 <img src="{% static 'images/download.png' %}" alt="Default Image">
             {% endif %}
+            <p class="page">{{recipe.user}}</p>
             <p class="name">{{ recipe.name }}</p>
             <p class="description">{{ recipe.discription }}</p>
             <a href="{% url "recipedetail" recipe.name %}"><button >View Recipe</button></a>
+            <a href="{% url "follow" recipe.user %}"><button >Follow</button></a>
         </div>
         {% endfor %}
     </div>

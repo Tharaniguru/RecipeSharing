@@ -1,25 +1,80 @@
 {% load static %}
-{% include "navbar.html" %}
-<link rel="stylesheet" href="{% static 'css/addrecipe.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="{% static 'css/addrecipe.css' %}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    
+    <div class="container">
+        <form id="recipe-form" method="POST" action="{% url 'addrecipe' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Add Your Recipe</h2>
 
-<div class="container">
-    <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label>Recipe Name :</label>
-        <input type="text" name="recipename" required>
+            <label>Recipe Name:</label>
+            <input type="text" name="recipename" required>
 
-        <label>Description :</label>
-        <textarea name="recipedescription" required></textarea>
+            <label>Description:</label>
+            <textarea name="recipedescription" required></textarea>
 
-        <label>Ingredients :</label>
-        <textarea name="recipeingrediants" required></textarea>
+            <label>Ingredients:</label>
+            <textarea name="recipeingrediants" required></textarea>
 
-        <label>Recipe :</label>
-        <textarea name="recipe" required></textarea>
+            <label>Recipe:</label>
+            <textarea name="recipe" required></textarea>
 
-        <label>Upload Image:</label>
-        <input type="file" name="recipeimage" accept="image/*" required>
+            <label>Upload Image:</label>
+            <input type="file" name="recipeimage" accept="image/*" required>
 
-        <button type="submit">Submit Recipe</button>
-    </form>
-</div>
+            <button type="submit">Submit Recipe</button>
+        </form>
+    </div>
+
+    <!-- Geolocation Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('recipe-form');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent immediate submit
+
+                if (!navigator.geolocation) {
+                    console.warn("Geolocation not supported.");
+                    form.submit();
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+
+                        const latInput = document.createElement('input');
+                        latInput.type = 'hidden';
+                        latInput.name = 'latitude';
+                        latInput.value = lat;
+
+                        const lonInput = document.createElement('input');
+                        lonInput.type = 'hidden';
+                        lonInput.name = 'longitude';
+                        lonInput.value = lon;
+
+                        form.appendChild(latInput);
+                        form.appendChild(lonInput);
+
+                        form.submit();
+                    },
+                    function (error) {
+                        console.warn("Geolocation error:", error.message);
+                        form.submit(); // Fallback: submit without location
+                    }
+                );
+            });
+        }
+    });
+    </script>
+</body>
+</html>
