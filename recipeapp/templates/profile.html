@@ -3,46 +3,108 @@
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 
 <div class="profile-container">
+
+    <!-- Profile Info -->
     <div class="profile-card">
         <h2>{{ request.user.username }}</h2>
         <p>{{ request.user.email }}</p>
         <a href="{% url 'addrecipe' %}">
             <button id="add-recipe">Add Recipe</button>
-
         </a>
     </div>
 
+    <!-- Your Recipes Table -->
     <div class="table-container">
+        <h2>Your Recipes</h2>
         {% if user_recipes %}
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Recipies</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for recipe in user_recipes %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ recipe.name }}</td>
-                    <td>
-                        <a href="{% url 'recipedetail' recipe.name %}">
-                            <button class="view-btn">View</button>
-                        </a>
-                        <a href="{% url 'delete_recipe' recipe.id %}" onclick="return confirm('Are you sure?');">
-                            <button class="del-btn">Del</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        
-        
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Recipe Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in user_recipes %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ recipe.name }}</td>
+                            <td>
+                                <a href="{% url 'recipedetail' recipe.id %}"><button class="view-btn">View</button></a>
+                                <a href="{% url 'delete_recipe' recipe.id %}" onclick="return confirm('Are you sure?');">
+                                    <button class="del-btn">Delete</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         {% else %}
-        <p style="text-align: center;">No recipes found.</p>
+            <p style="text-align: center;">No recipes found.</p>
         {% endif %}
     </div>
+
+    <!-- Orders You Placed -->
+    <div class="table-container">
+        <h2>Ordered Recipes</h2>
+        {% if  user_orders %}
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Recipe</th>
+                        <th>Quantity</th>
+                        <th>Order Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in  user_orders %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ order.product.name }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>{{ order.order_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p style="text-align: center;">You haven't ordered any recipes.</p>
+        {% endif %}
+    </div>
+
+    <!-- Orders To Deliver -->
+    <div class="table-container">
+        <h2>Recipes to Deliver</h2>
+        {% if to_deliver %}
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Recipe</th>
+                        <th>Ordered By</th>
+                        <th>Quantity</th>
+                        <th>Address</th>
+                        <th>Order Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in to_deliver %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ order.product.name }}</td>
+                            <td>{{ order.customer.username }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>{{ order.address }}</td>
+                            <td>{{ order.order_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p style="text-align: center;">No pending deliveries.</p>
+        {% endif %}
+    </div>
+
 </div>

@@ -3,31 +3,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Recipe</title>
+    <title>Order Recipe</title>
     <link rel="stylesheet" href="{% static 'css/addrecipe.css' %}">
 </head>
 <body>
     {% include "navbar.html" %}
     
     <div class="container">
-        <form id="recipe-form" method="POST" action="{% url 'profile' %}">
+        <form id="recipe-form" method="POST" action="{% url 'order' recipe.id %}">
             {% csrf_token %}
             <h2>Order Your Recipe</h2>
 
             <label>Name:</label>
-            {{form.customer_name}}
+            {{ form.customer_name }}
 
             <label>Email:</label>
-            {{form.email}}
+            {{ form.email }}
 
             <label>Address:</label>
-            {{form.address}}
+            {{ form.address }}
+
             <label>Phone:</label>
-            {{form.phone}}
+            {{ form.phone }}
 
             <label>Quantity:</label>
-            {{form.quantity}}
+            {{ form.quantity }}
 
             <button type="submit">Place Order</button>
         </form>
     </div>
+
+    <!-- Geolocation Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('recipe-form');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent default submit
+
+                if (!navigator.geolocation) {
+                    console.warn("Geolocation not supported.");
+                    form.submit();
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+
+                        const latInput = document.createElement('input');
+                        latInput.type = 'hidden';
+                        latInput.name = 'latitude';
+                        latInput.value = lat;
+
+                        const lonInput = document.createElement('input');
+                        lonInput.type = 'hidden';
+                        lonInput.name = 'longitude';
+                        lonInput.value = lon;
+
+                        form.appendChild(latInput);
+                        form.appendChild(lonInput);
+
+                        form.submit(); // Submit after location is attached
+                    },
+                    function (error) {
+                        console.warn("Geolocation error:", error.message);
+                        form.submit(); // Submit anyway if location fails
+                    }
+                );
+            });
+        }
+    });
+    </script>
+</body>
+</html>

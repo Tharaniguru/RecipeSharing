@@ -13,7 +13,11 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Username")
     password = forms.CharField(widget=forms.PasswordInput, label="Password")
 
+from django import forms
+from .models import Order
+
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['customer_name', 'email', 'address', 'phone', 'product', 'quantity']
+        fields = ['customer_name','email','address','phone','quantity']
+

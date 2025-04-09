@@ -14,17 +14,23 @@ def Home_view(request):
 
 @login_required
 def profile_view(request):
-    orders=OrderForm
     user_recipes = Recipes.objects.filter(user=request.user).order_by('-id')
-    return render(request, "profile.html",{"user_recipes": user_recipes})
+    user_orders=Order.objects.filter(customer=request.user)
+    to_deliver=Order.objects.filter(product__user=request.user).exclude(customer=request.user)
+    context = {
+        'user_recipes': user_recipes,
+        'user_orders': user_orders,
+        'to_deliver': to_deliver,
+    }
+    return render(request, "profile.html",context)
 
 def categories_view(request):
     categories = Category.objects.all()
     return render(request ,"categories.html" ,{'categories':categories})
 
 @login_required
-def recipedetail_view(request,name):
-    recipedetail=Recipes.objects.filter(name=name)
+def recipedetail_view(request,id):
+    recipedetail=Recipes.objects.filter(id=id)
     print(recipedetail)
     return render(request,"displayfood.html",{'recipedetail':recipedetail})
 
@@ -55,21 +61,26 @@ def addrecipe_view(request):
     return render(request, "addrecipe.html")
 
 @login_required
-def order_view(request,name):
+def order_view(request, id):
+    recipe = get_object_or_404(Recipes, id=id)  
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            order = form.save(commit=False)  
-            order.latitude = request.POST.get('latitude')  
+            order = form.save(commit=False)
+            order.latitude = request.POST.get('latitude')
             order.longitude = request.POST.get('longitude')
-            order.product=name
-            order.save()  
+            order.product = recipe
+            order.customer = request.user
+            order.save()
             messages.success(request, "Order placed successfully.")
             return redirect('profile')
     else:
-        form = OrderForm()  
+        form = OrderForm()
 
-    return render(request, "order.html", {'form': form})
+    return render(request, "order.html", {'form': form, 'recipe': recipe})
+
+
 
 
 @login_required
