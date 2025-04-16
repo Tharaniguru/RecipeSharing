@@ -98,6 +98,7 @@
                             <td>{{ order.quantity }}</td>
                             <td>{{ order.address }}</td>
                             <td>{{ order.order_date }}</td>
+                            <td><a href={% url "order_details" order.id %}><button class="view-btn">View</button></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

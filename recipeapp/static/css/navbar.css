@@ -1,23 +1,49 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
-    padding: 15px 20px;
+    background: linear-gradient(to right, #90C67C, #60B5FF);
+    padding: 15px 30px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Logo Styling */
 .logo a {
-    text-decoration: none !important; /* Remove underline */
-    color: white !important; /* Text color */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffff;
     font-size: 1.8em;
-    font-weight: bold;
-    transition: color 0.3s ease-in-out;
+    font-weight: 600;
+    transition: transform 0.3s ease;
 }
 
 .logo a:hover {
-    color: #f4a261 !important; /* Hover color */
+    transform: scale(1.05);
+}
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-img {
+    height: 50px;         /* Reduce height */
+    width: auto;          /* Maintain aspect ratio */
+    margin-right: 10px;
+    object-fit: contain;  /* Make sure it doesn’t stretch */
+    border-radius: 6px;   /* Optional: make it rounded */
+}
+
+
+.site-name {
+    color: #f8f9fa;
 }
 
 /* Navigation Links */
@@ -35,11 +61,17 @@
 
 .nav-links a {
     text-decoration: none;
-    color: white;
+    color: #ffffff;
     font-size: 1em;
-    transition: color 0.3s ease-in-out;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
 }
 
 .nav-links a:hover {
-    color: #f4a261;
+    background-color: #f4a261;
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(244, 162, 97, 0.3);
+    transform: translateY(-2px);
 }

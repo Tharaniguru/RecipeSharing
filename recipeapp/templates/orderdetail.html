@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/displayfood.css' %}">
+
+{% include 'navbar.html' %}
+
+{% if detail %}
+    <div class="container">
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <div class="description-container">
+                    <h2 class="name">{{ detail.product.name }}</h2>
+                </div>
+            </div>
+            
+            <div class="recipe-details">
+                <p class="ingredients">{{ detail.customer }}</p>
+                <p class="ingredients">{{ detail.email }}</p>
+                <p class="ingredients">{{ detail.address }}</p>
+                <p class="ingredients">{{ detail.phone }}</p>
+                <p class="ingredients">{{ detail.quantity }}</p>
+                <a href={% url "recipedetail" detail.product.id%}><button>View Product</button></a>
+                
+            </div>
+        </div>
+    </div>
+{% else %}
+    <p>No recipe found.</p>
+{% endif %}

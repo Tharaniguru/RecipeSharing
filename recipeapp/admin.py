@@ -9,7 +9,7 @@ class Categoryadmin(admin.ModelAdmin):
     list_display=['name']
 
 class Recepiesadmin(admin.ModelAdmin):
-    list_display=['name','discription','category','recipe_image']
+    list_display=['name','discription','recipe_image']
 
-admin.site.register(Category,Categoryadmin)
+# admin.site.register(Category,Categoryadmin)
 admin.site.register(Recipes,Recepiesadmin)

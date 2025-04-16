@@ -6,7 +6,7 @@
 {% if recipies %}
     <div class="container">
         {% for recipe in recipies %}
-        <div class="box">
+        <div class="box"> 
             {% if recipe.recipe_image %}
                 <img src="{{ recipe.recipe_image.url }}" alt="{{ recipe.name }}">
             {% else %}

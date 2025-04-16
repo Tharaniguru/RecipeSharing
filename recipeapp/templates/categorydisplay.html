@@ -14,7 +14,11 @@
             {% endif %}
             <p class="name">{{ food.name }}</p>
             <p class="description">{{ food.discription }}</p>
-            <a href="{% url "recipedetail" recipe.name %}"><button >View Recipe</button></a>
+            {% if recipe.id %}
+            <a href="{% url 'recipedetail' recipe.id %}">{{ recipe.name }}</a>
+            {% else %}
+            <p>Invalid recipe</p>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

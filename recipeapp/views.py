@@ -24,9 +24,15 @@ def profile_view(request):
     }
     return render(request, "profile.html",context)
 
-def categories_view(request):
-    categories = Category.objects.all()
-    return render(request ,"categories.html" ,{'categories':categories})
+# def categories_view(request):
+#     categories = Category.objects.all()
+#     return render(request ,"categories.html" ,{'categories':categories})
+
+
+# def categorydisplay_view(request, id):
+#     category = get_object_or_404(Category, id=id)
+#     foods = Recipes.objects.filter(category=category)
+#     return render(request, "categorydisplay.html", {"foods": foods, "category": category})
 
 @login_required
 def recipedetail_view(request,id):
@@ -37,28 +43,19 @@ def recipedetail_view(request,id):
 @login_required
 def addrecipe_view(request):
     if request.method == "POST":
-        name = request.POST.get("recipename")
-        description = request.POST.get("recipedescription")
-        ingredients = request.POST.get("recipeingrediants")
-        instructions = request.POST.get("recipe")
-        image = request.FILES.get("recipeimage")
-        latitude = request.POST.get('latitude')
-        longitude = request.POST.get('longitude')
+        form = AddrecipeForm(request.POST,request.FILES)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.latitude = request.POST.get('latitude')
+            recipe.longitude = request.POST.get('longitude')
+            recipe.save()
+            form.save_m2m()
+            messages.success(request, "Recipe added successfully.")
+            return redirect("home")  
+    else:
+        form = AddrecipeForm()
+    return render(request, "addrecipe.html",{'form':form})
 
-        recipe = Recipes(
-            name=name,
-            discription=description,
-            recipe_ingredients=ingredients,
-            recipe_instructions=instructions,
-            recipe_image=image,
-            user=request.user,
-            latitude=latitude if latitude else None,
-            longitude=longitude if longitude else None  
-        )
-        recipe.save()
-        messages.success(request, "Recipe added successfully.")
-        return redirect("home")  
-    return render(request, "addrecipe.html")
 
 @login_required
 def order_view(request, id):
@@ -91,9 +88,6 @@ def delete_recipe_view(request, id):
     return redirect("profile")
 
 
-def categorydisplay_view(request,category):
-    foods=Recipes.objects.filter(category=category)
-    return render(request,"categorydisplay.html",{"foods":foods})
 
 def signup_view(request):
     if request.method == "POST":
@@ -116,7 +110,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("home")  # Redirect after login
+            return redirect("home")  
     else:
         form = LoginForm()
     return render(request, "login.html", {"form": form})
@@ -128,4 +122,10 @@ def logout_view(request):
 @login_required
 def follow_view(request):
     pass
+
+
+@login_required
+def orderdetails_view(request,id):
+    detail=get_object_or_404(Order,id=id)
+    return render(request,"orderdetail.html",{"detail":detail})
 

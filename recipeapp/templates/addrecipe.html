@@ -15,19 +15,22 @@
             <h2>Add Your Recipe</h2>
 
             <label>Recipe Name:</label>
-            <input type="text" name="recipename" required>
+            {{ form.name }}
 
             <label>Description:</label>
-            <textarea name="recipedescription" required></textarea>
+            {{ form.discription }}
 
             <label>Ingredients:</label>
-            <textarea name="recipeingrediants" required></textarea>
+            {{ form.recipe_ingredients }}
 
-            <label>Recipe:</label>
-            <textarea name="recipe" required></textarea>
+            <label>Recipe Instructions:</label>
+            {{ form.recipe_instructions }}
+
+            {% comment %} <label>Categories:</label>
+            {{ form.category }} {% endcomment %}
 
             <label>Upload Image:</label>
-            <input type="file" name="recipeimage" accept="image/*" required>
+            {{ form.recipe_image }}
 
             <button type="submit">Submit Recipe</button>
         </form>
