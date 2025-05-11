@@ -1,0 +1,124 @@
+/* General Reset and Layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Navbar stays at top */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: #000000;
+    color: white;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+/* Container for everything below navbar */
+.profile-container {
+    margin-top: 100px;
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Card */
+.profile-card {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-card h2 {
+    margin: 10px 0;
+    font-size: 28px;
+}
+
+.profile-card p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 16px;
+}
+
+
+#add-recipe {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#add-recipe:hover {
+    background-color: #0056b3;
+}
+
+/* Styled Recipe Table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 14px 30px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+.styled-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.styled-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Buttons in Action Column */
+.view-btn,
+.del-btn {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.view-btn {
+    background-color: #007bff;
+}
+
+.view-btn:hover {
+    background-color: #0056b3;
+}
+
+.del-btn {
+    background-color: #dc3545;
+}
+
+.del-btn:hover {
+    background-color: #a81c2c;
+}
