@@ -28,9 +28,11 @@
                 <h3>Instructions:</h3>
                 <p class="instructions">{{ recipe.recipe_instructions }}</p>
             </div>
-            <a href="{% url 'order' recipe.id%}">
-                <button>Order Now</button>
-            </a>
+            {% if recipe.user != request.user %}
+                <a href="{% url 'order' recipe.id %}">
+                    <button>Order Now</button>
+                </a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

@@ -16,7 +16,7 @@
             <p class="name">{{ recipe.name }}</p>
             <p class="description">{{ recipe.discription }}</p>
             <a href="{% url "recipedetail" recipe.id %}"><button >View Recipe</button></a>
-            <a href="{% url "follow" recipe.user %}"><button >Follow</button></a>
+            {% comment %} <a href="{% url "follow" recipe.user %}"><button >Follow</button></a> {% endcomment %}
         </div>
         {% endfor %}
     </div>

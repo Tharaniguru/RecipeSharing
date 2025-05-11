@@ -48,6 +48,7 @@ def addrecipe_view(request):
             recipe = form.save(commit=False)
             recipe.latitude = request.POST.get('latitude')
             recipe.longitude = request.POST.get('longitude')
+            recipe.user = request.user
             recipe.save()
             form.save_m2m()
             messages.success(request, "Recipe added successfully.")

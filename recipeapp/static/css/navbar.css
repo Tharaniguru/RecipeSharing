@@ -7,7 +7,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to right, #90C67C, #60B5FF);
+    background: linear-gradient(to right, #78b0e0, #60B5FF);
     padding: 15px 30px;
     border-radius: 0 0 12px 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
